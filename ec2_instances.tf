@@ -15,6 +15,10 @@ resource "aws_instance" "test_ec2_1" {
   vpc_security_group_ids      = [aws_security_group.test_sg_1.id]
   subnet_id                   = aws_subnet.test_subnet_0.id
   associate_public_ip_address = true
+
+  // インスタンスプロファイルを関連付け
+  iam_instance_profile = aws_iam_instance_profile.test_ec2_instance_profile.name
+
   tags = {
     Name = "test-ec2-1"
   }
@@ -26,6 +30,10 @@ resource "aws_instance" "test_ec2_2" {
   key_name               = "test-keypair"
   vpc_security_group_ids = [aws_security_group.test_sg_2.id]
   subnet_id              = aws_subnet.test_subnet_2.id
+
+  // インスタンスプロファイルを関連付け
+  iam_instance_profile = aws_iam_instance_profile.test_ec2_instance_profile.name
+
   tags = {
     Name = "test-ec2-2"
   }
