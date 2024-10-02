@@ -1,12 +1,3 @@
-# 概要
-- public subnetとprivate subnetを作成し、それぞれにEC2インスタンスを配置
-- S3バケットを設置
-- EC2インスタンス内から、S3のバケットリストを取得することを試みる
-  - private subnet内のEC2インスタンスからは失敗する
-- VPCエンドポイントを設定
-  - private subnetのルートテーブルにS3へのエントリが追加され、S3バケットリスト取得が成功する。
-![](diagram_vpc_endpoint.png)
-
 # VPCエンドポイントとは
 セキュリティ向上のため、VPC内のリソースが、インターネットを介さずにAWSのサービスにアクセスできるようにするコンポーネントのこと。ほかにも、AWSサービスへの通信はインターネットを経由しなくなるNATのコストを下げることにもつながる。
 
@@ -17,6 +8,17 @@ ENIがsubnetにアタッチされ、これがプライベートIPアドレスを
 
 ## ゲートウェイ型（無料）
 利用するAWSのサービスへのエイリアス（com.amazonaws.us-east-1.s3みたいなもの）がルートテーブルにのり、そちらにトラフィックが向く。今回はこちらを試行。
+
+# やったこと概要
+- public subnetとprivate subnetを作成し、それぞれにEC2インスタンスを配置
+- S3バケットを設置
+- EC2インスタンス内から、S3のバケットリストを取得することを試みる
+  - private subnet内のEC2インスタンスからは失敗する
+- VPCエンドポイントを設定
+  - private subnetのルートテーブルにS3へのエントリが追加され、S3バケットリスト取得が成功する。
+
+下図は、Pluralithでterraformファイルから自動作図
+![](diagram_vpc_endpoint.png)
 
 vpc_endpoint.tf
 
